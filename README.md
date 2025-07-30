@@ -42,7 +42,7 @@ lab5-image-viewer/
 │  └─ test/java/          # Tests JUnit pour modèle, commandes et sérialisation
 ├─ docs /                  # Diagrammes UML (classes, séquences) et rapport final
 ├─ pom.xml (ou build.gradle)
-└─ README.md
+└─ README.md  
 
 ├─
 │  │
