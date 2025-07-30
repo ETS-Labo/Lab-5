@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import Vue.Observer;
+import Vue.PerspectiveView;
 
 
 public class ImageModel implements Observable, Serializable{
     private String filePath;
-    private List<PerspectiveModel> perspectives;
+    private List<PerspectiveView> perspectives;
 
     public void loadImage(String path){
 
@@ -36,6 +37,8 @@ public class ImageModel implements Observable, Serializable{
     }
 
     public void notifyObservers(){
-        
+        for (PerspectiveView perspective : perspectives){
+            perspective.update();
+        }
     }
 }
