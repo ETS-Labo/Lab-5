@@ -1,5 +1,4 @@
 package Vue;
-
-public interface Observer {
-
+public interface Observer { 
+    void update(); 
 }

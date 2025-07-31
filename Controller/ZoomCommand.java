@@ -2,16 +2,22 @@ package Controller;
 
 import Model.PerspectiveModel;
 
-public class ZoomCommand implements Command{
+public class ZoomCommand implements Command {
     private PerspectiveModel perspective;
     private double previousScale;
-    private double facto;
+    private double factor;
 
-    public void execute(){
-
+    public ZoomCommand(PerspectiveModel perspective, double factor) {
+        this.perspective = perspective;
+        this.factor = factor;
     }
 
-    public void undo(){
-        
+    public void execute() {
+        previousScale = perspective.getScale();
+        perspective.zoom(factor);
+    }
+
+    public void undo() {
+        perspective.zoom(previousScale / perspective.getScale());
     }
 }

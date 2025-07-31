@@ -1,30 +1,68 @@
 package Vue;
-import javax.swing.JPanel;
 
-import java.awt.event.MouseEvent;
+import javax.swing.*;
 
 import Controller.MouseController;
-import Model.PerspectiveModel;
-import java.awt.event.MouseAdapter;
 
+import java.awt.*;
+import java.awt.event.*;
+import Model.PerspectiveModel;
+
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class PerspectiveView extends JPanel implements Observer{
-    private PerspectiveModel image;
-     private MouseController mouseController;
+    private PerspectiveModel model;
+    private MouseController mouseController;
+    private BufferedImage img = null;
 
-     public PerspectiveView(PerspectiveModel model) {
+    public PerspectiveView(PerspectiveModel model) {
+        this.model = model;
+        model.addObserver(this);
         mouseController = new MouseController(model);
 
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    mouseController.mousePressed(e);;
-                }
-            }); 
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { mouseController.mousePressed(e); }
+            @Override
+            public void mouseReleased(MouseEvent e) { mouseController.mouseReleased(e); }
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mouseController.mouseClicked(e);
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                mouseController.mouseDragged(e);
+            }
+        });
     }
-    
-    
+
+    @Override
     public void update(){
+        if (model.getImagePath() != null && !model.getImagePath().isEmpty()) {
+            try {
+                img = ImageIO.read(new File(model.getImagePath()));
+            } catch(Exception ex) {
+                img = null;
+            }
+        }
         repaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g){
+        super.paintComponent(g);
+        if (img != null) {
+            Graphics2D g2 = (Graphics2D) g;
+            // Applique zoom et translation
+            g2.translate(model.getTranslation().x, model.getTranslation().y);
+            g2.scale(model.getScale(), model.getScale());
+            g2.drawImage(img, 0, 0, this);
+        } else {
+            g.drawString("Aucune image", 50, 50);
+        }
     }
 }
