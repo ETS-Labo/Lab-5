@@ -1,44 +1,58 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
 import Vue.Observer;
 import Vue.PerspectiveView;
 
-
-public class ImageModel implements Observable, Serializable{
+public class ImageModel implements Observable, Serializable {
+    private static ImageModel instance;
     private String filePath;
-    private List<PerspectiveView> perspectives;
+    private List<PerspectiveModel> perspectives = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
 
-    public void loadImage(String path){
+    private ImageModel() {}
 
+    public static synchronized ImageModel getInstance() {
+        if (instance == null) {
+            instance = new ImageModel();
+        }
+        return instance;
     }
 
-    public String getFilePath(){
-        return null;
+    public void loadImage(String path) {
+        this.filePath = path;
+        for (PerspectiveModel p : perspectives) {
+            p.setImagePath(path);
+        }
+        notifyObservers();
     }
 
-    public void addPerspective(PerspectiveModel p){
-        
+    public String getFilePath() {
+        return filePath;
     }
 
-    public PerspectiveModel getPerspective(){
-        return null;
+    public void addPerspective(PerspectiveModel p) {
+        perspectives.add(p);
+        notifyObservers();
     }
 
-
-    public void addObserver(Observer o){
-
+    public List<PerspectiveModel> getPerspectives() {
+        return perspectives;
     }
 
-    public void removeObserver(Observer o){
-
+    public void addObserver(Observer o) {
+        observers.add(o);
     }
 
-    public void notifyObservers(){
-        for (PerspectiveView perspective : perspectives){
-            perspective.update();
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (Observer o : observers) {
+            o.update();
         }
     }
 }
