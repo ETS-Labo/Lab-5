@@ -2,7 +2,9 @@ package Vue;
 
 import javax.swing.*;
 
+import Controller.Command;
 import Controller.MouseController;
+import Controller.ZoomCommand;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -38,6 +40,15 @@ public class PerspectiveView extends JPanel implements Observer{
         addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
                 mouseController.mouseDragged(e);
+            }
+        });
+
+        addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                double factor = (e.getWheelRotation() < 0) ? 1.1 : 0.9;
+                Command zoomCmd = new ZoomCommand(model, factor);
+                Controller.CommandManager.getInstance().executeCommand(zoomCmd);
             }
         });
     }
