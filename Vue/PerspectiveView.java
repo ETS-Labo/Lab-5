@@ -6,6 +6,8 @@ import Controller.MouseController;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+
 import Model.PerspectiveModel;
 
 import java.awt.image.BufferedImage;
@@ -58,9 +60,17 @@ public class PerspectiveView extends JPanel implements Observer{
         if (img != null) {
             Graphics2D g2 = (Graphics2D) g;
             // Applique zoom et translation
+            // Sauvegarde l'état initial
+            AffineTransform saved = g2.getTransform();
+
+            // Applique la translation/zoom uniquement pour l'image
             g2.translate(model.getTranslation().x, model.getTranslation().y);
             g2.scale(model.getScale(), model.getScale());
             g2.drawImage(img, 0, 0, this);
+
+            // Restaure l'état initial pour ne PAS transformer la bordure/les autres dessins
+            g2.setTransform(saved);
+
         } else {
             g.drawString("Aucune image", 50, 50);
         }
