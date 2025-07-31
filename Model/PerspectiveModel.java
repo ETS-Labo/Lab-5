@@ -30,6 +30,22 @@ public class PerspectiveModel implements Serializable {
 
     public void setImagePath(String path) {
         imagePath = path;
+        scale = 0.5;
+        translateX = 0;
+        translateY = 0;
+        notifyObservers();
+    }
+
+    public void setTranslation(double perspectiveData, double perspectiveData2) {
+        // TODO Auto-generated method stub
+        this.translateX = perspectiveData;
+        this.translateY = perspectiveData2;
+        notifyObservers();
+    }
+
+    public void setScale(double scale2) {
+        // TODO Auto-generated method stub
+        this.scale = scale2;
         notifyObservers();
     }
 
