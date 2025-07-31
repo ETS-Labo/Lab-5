@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.labo5'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    // Si App.java est dans le package par défaut :
+    mainClass.set('App')
+    // Si tu mets App dans un package, par exemple "com.myapp", alors :
+    // mainClass = 'com.myapp.App'
+}
