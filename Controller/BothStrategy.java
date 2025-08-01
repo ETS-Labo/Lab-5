@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.PerspectiveModel;
+
 public class BothStrategy implements CopyStrategy {
         private final ScaleStrategy scaleStrat = new ScaleStrategy();
         private final TranslateStrategy translateStrat = new TranslateStrategy();

@@ -49,6 +49,10 @@ public class PerspectiveModel implements Serializable {
         notifyObservers();
     }
 
+    public PerspectiveMemento createMemento(){
+        return new PerspectiveMemento();
+    }
+
     public void addObserver(Observer o) { observers.add(o); }
     public void removeObserver(Observer o) { observers.remove(o); }
     public void notifyObservers() { for (Observer o : observers) o.update(); }
