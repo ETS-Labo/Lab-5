@@ -1,8 +1,9 @@
+/*
+
+Ici je vais mettre un test unitaire
+Donc prenez pas en compte ce qu'il y a ici car il sera modifié et migré vers un autre dossier.
 package Controller;
 
-/* Ici je vais mettre un test unitaire
-Donc prenez pas en compte ce qu'il y a ici car il sera modifié et migré vers un autre dossier.
- */
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,3 +40,4 @@ class TranslateCommandMementoTest {
     }
 }
 
+ */
