@@ -1,26 +1,27 @@
 package Controller;
 
 import Model.PerspectiveModel;
+import Model.PerspectiveMemento;
 
 public class TranslateCommand implements Command {
-    private PerspectiveModel perspective;
-    private double prevX, prevY;
-    private double dx, dy;
+    private final PerspectiveModel perspective;
+    private final double dx, dy;
+    private final PerspectiveMemento before;
 
     public TranslateCommand(PerspectiveModel perspective, double dx, double dy) {
         this.perspective = perspective;
         this.dx = dx;
         this.dy = dy;
+        this.before = perspective.createMemento();
     }
 
+    @Override
     public void execute() {
-        prevX = perspective.getTranslation().getX();
-        prevY = perspective.getTranslation().getY();
         perspective.translate(dx, dy);
     }
 
+    @Override
     public void undo() {
-        perspective.translate(prevX - perspective.getTranslation().getX(),
-                              prevY - perspective.getTranslation().getY());
+        perspective.restore(before);
     }
 }
