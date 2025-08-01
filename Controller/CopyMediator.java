@@ -11,11 +11,11 @@ public class CopyMediator {
 
     private CopyMediator(){}
 
-    public CopyMediator getInstance(Memento Manager manag){
+    public CopyMediator getInstance(MementoManager manag){
         if(mediator == null){
             mediator = new CopyMediator();
         }
-        this.manag = manage;
+        this.manag = manag;
         return mediator;
     }
 
@@ -25,8 +25,8 @@ public class CopyMediator {
         this.strat = strat;
     }
 
-    public void past(PerspectiveModel target){
-        start.apply(target)
+    public void past(PerspectiveModel source, PerspectiveModel target){
+        strat.apply(source, target);
     }
 
 }
