@@ -18,7 +18,7 @@ public class CommandManager {
             history.pop().undo();
         }
     }
-
+    
     public void executeCommand(Command c) {
         c.execute();
         history.push(c);

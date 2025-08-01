@@ -17,7 +17,9 @@ public class CopyMediator {
     }
 
     public void copy(PerspectiveModel source, CopyStrategy strat){
-        lastMemento = 
+        lastMemento = ;
+        this.strat = strat
+        
     }
 
     public void past(PerspectiveModel target){
