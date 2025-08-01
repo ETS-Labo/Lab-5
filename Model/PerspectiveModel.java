@@ -36,16 +36,26 @@ public class PerspectiveModel implements Serializable {
         notifyObservers();
     }
 
-    public void setTranslation(double perspectiveData, double perspectiveData2) {
-        // TODO Auto-generated method stub
-        this.translateX = perspectiveData;
-        this.translateY = perspectiveData2;
+    public void setTranslation(double x, double y) {
+        this.translateX = x;
+        this.translateY = y;
         notifyObservers();
     }
 
-    public void setScale(double scale2) {
-        // TODO Auto-generated method stub
-        this.scale = scale2;
+    public void setScale(double s) {
+        this.scale = s;
+        notifyObservers();
+    }
+
+    // Memento support
+    public PerspectiveMemento createMemento() {
+        return new PerspectiveMemento(scale, translateX, translateY);
+    }
+
+    public void restore(PerspectiveMemento memento) {
+        this.scale = memento.getScale();
+        this.translateX = memento.getTranslateX();
+        this.translateY = memento.getTranslateY();
         notifyObservers();
     }
 

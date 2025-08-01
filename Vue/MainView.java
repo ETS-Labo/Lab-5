@@ -137,6 +137,27 @@ public class MainView extends JFrame {
         menuRedo.addActionListener(e -> CommandManager.getInstance().undoLast());
         menuEdition.add(menuRedo);
 
+        JMenu menuSave = new JMenu("Presse-Papier");
+        JButton bouton = new JButton("Choisir...");
+        bouton.addActionListener(e -> {
+            String[] choix = { "Position (x, y)", "Niveau de zoom", "Position et Zoom" };
+            JComboBox<String> comboBox = new JComboBox<>(choix);
+            int result = JOptionPane.showConfirmDialog(
+                null,                      // parent (ta JFrame/lui-même)
+                comboBox,                  // le composant à afficher
+                "Choisissez ce que vous voulez sauvegarder",
+                JOptionPane.OK_CANCEL_OPTION
+            );
+            if (result == JOptionPane.OK_OPTION) {
+                String selection = (String) comboBox.getSelectedItem();
+                JOptionPane.showMessageDialog(null, "Vous avez choisi : " + selection);
+                // Ici tu appliques le traitement voulu selon le choix...
+            }
+        });
+
+
+        menuEdition.add(menuSave);
+
         // Ajout des menus
         menuBar.add(menuFichier);
         menuBar.add(menuEdition);
