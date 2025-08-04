@@ -22,7 +22,6 @@ public class PerspectiveModel implements Serializable {
         translateX += dx;
         translateY += dy;
         notifyObservers();
-        System.out.print("saucisse");
     }
 
     public double getScale() { return scale; }
