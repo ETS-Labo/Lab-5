@@ -1,10 +1,11 @@
 package Controller;
 
-import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 public class CommandManager {
     private static CommandManager instance;
-    private Stack<Command> history = new Stack<>();
+    private List<Command> history = new ArrayList<>();
 
     private CommandManager() {}
 
@@ -15,12 +16,13 @@ public class CommandManager {
 
     public void undoLast() {
         if (!history.isEmpty()) {
-            history.pop().undo();
+            Command last = history.remove(history.size()-1);
+            last.undo();
         }
     }
 
     public void executeCommand(Command c) {
         c.execute();
-        history.push(c);
+        history.add(c);
     }
 }
