@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import Vue.Observer;
-import Vue.PerspectiveView;
 
 public class ImageModel implements Observable, Serializable {
     private static ImageModel instance;

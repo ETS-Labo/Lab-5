@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 
+
 public class PerspectiveView extends JPanel implements Observer{
     private PerspectiveModel model;
     private MouseController mouseController;
@@ -70,20 +71,18 @@ public class PerspectiveView extends JPanel implements Observer{
         super.paintComponent(g);
         if (img != null) {
             Graphics2D g2 = (Graphics2D) g;
-            // Applique zoom et translation
-            // Sauvegarde l'état initial
             AffineTransform saved = g2.getTransform();
 
-            // Applique la translation/zoom uniquement pour l'image
             g2.translate(model.getTranslation().x, model.getTranslation().y);
             g2.scale(model.getScale(), model.getScale());
             g2.drawImage(img, 0, 0, this);
 
-            // Restaure l'état initial pour ne PAS transformer la bordure/les autres dessins
             g2.setTransform(saved);
 
         } else {
-            g.drawString("Aucune image", 50, 50);
+            int y = getHeight()/2;
+            int x = getWidth()/3;
+            g.drawString("Aucune image", x, y);
         }
     }
 }

@@ -14,7 +14,7 @@ public class ThumbnailView extends JPanel implements Observer {
     public ThumbnailView(ImageModel model) {
         this.model = model;
         model.addObserver(this);
-        update(); // charge l'éventuelle image déjà présente
+        update(); 
     }
 
     @Override
@@ -33,14 +33,16 @@ public class ThumbnailView extends JPanel implements Observer {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (img != null) {
-            // Affiche la miniature centrée, adaptée à la taille du panel
-            int w = getWidth(), h = getHeight();
+            int w = getWidth();
+            int h = getHeight();
             double ratio = Math.min((double)w/img.getWidth(), (double)h/img.getHeight());
             int iw = (int)(img.getWidth()*ratio);
             int ih = (int)(img.getHeight()*ratio);
             g.drawImage(img, (w-iw)/2, (h-ih)/2, iw, ih, this);
         } else {
-            g.drawString("Miniature : aucune image", 10, 20);
+            int y = getHeight()/2;
+            int x = getWidth()/4;
+            g.drawString("Miniature : aucune image", x, y);
         }
     }
 }

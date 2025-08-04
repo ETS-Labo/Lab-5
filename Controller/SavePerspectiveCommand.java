@@ -27,6 +27,5 @@ public class SavePerspectiveCommand implements Command {
 
     @Override
     public void undo() {
-        // Optionnel : supprimer le fichier ou restaurer un backup si tu veux rendre cette action annulable...
     }
 }

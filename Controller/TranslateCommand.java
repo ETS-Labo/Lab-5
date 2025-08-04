@@ -20,7 +20,6 @@ public class TranslateCommand implements Command {
     }
 
     public void undo() {
-        perspective.translate(prevX - perspective.getTranslation().getX(),
-                              prevY - perspective.getTranslation().getY());
+        perspective.translate(prevX - perspective.getTranslation().getX(), prevY - perspective.getTranslation().getY());
     }
 }
